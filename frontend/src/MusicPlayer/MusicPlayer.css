@@ -12,7 +12,7 @@
   width: 80%;
   max-width: 500px;
   transition: all 0.3s ease;
-  cursor: pointer;  /* Makes the whole player clickable */
+  cursor: pointer;
 }
 
 .music-player.minimized {
@@ -50,13 +50,13 @@
 
 .song-name {
   cursor: pointer;
-  display: none;  /* Hide the song name when minimized */
+  font-size: 18px; /* Adjust the font size for the maximized view */
+  color: white;
+  display: block;  /* Ensure the song name is always displayed */
 }
 
 .music-player.minimized .song-name {
-  display: block;  /* Show the song name when minimized */
-  font-size: 14px;
-  color: white;
+  font-size: 14px;  /* Smaller font size for minimized state */
 }
 
 .timer-container,
