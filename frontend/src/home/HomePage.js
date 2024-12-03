@@ -90,7 +90,7 @@ function HomePage() {
         setActiveSongId(activeSongId === songId ? null : songId);
     };
 
-    const handleAddToPlaylist = async (e, songId) => {
+    const handleAddToPlaylist  = async (e, songId) => {
 
         console.log(songId, selectedPlaylist);
         e.stopPropagation(); // Prevent song block click from triggering

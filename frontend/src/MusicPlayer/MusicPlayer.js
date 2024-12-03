@@ -12,10 +12,11 @@ const MusicPlayer = ({ songId, queue }) => {
     const [currentSongIndex, setCurrentSongIndex] = useState(0);  
     const [loop, setLoop] = useState(false);  
     const [songName, setSongName] = useState('');
+    const [isMinimized, setIsMinimized] = useState(false); // State to track minimized/maximized
+
     const audioRef = useRef(null);
     const ENDPOINT = process.env.REACT_APP_API_ENDPOINT;
 
-    // Fetch and play the song based on the current song ID
     const playSongById = async (id) => {
         try {
             const response = await axios.get(ENDPOINT + `/api/songs/streamSongById`, {
@@ -27,12 +28,9 @@ const MusicPlayer = ({ songId, queue }) => {
             const newAudioUrl = URL.createObjectURL(audioBlob);
             setAudioUrl(newAudioUrl);
 
-            // TODO: add a request for song name
             const songInfoResponse = await axios.post(ENDPOINT + `/api/songs/getsonginfo`, { songId: id });
             const { song } = songInfoResponse.data;
-            setSongName(song.title); // Set the song title
-            console.log("Song Metadata:", song);
-
+            setSongName(song.title); 
 
             if (audioRef.current) {
                 audioRef.current.src = newAudioUrl;
@@ -45,46 +43,40 @@ const MusicPlayer = ({ songId, queue }) => {
         }
     };
 
-    // Play the next song in the queue
     const playNextInQueue = () => {
         if (Array.isArray(currentQueue) && currentQueue.length > 0 && currentSongIndex < currentQueue.length - 1) {
             const nextSongId = currentQueue[currentSongIndex + 1];
             setCurrentSongIndex(currentSongIndex + 1);
             playSongById(nextSongId);
         } else {
-            console.log('Queue is empty or all songs have been played.');
-            setIsPlaying(false);  // Stop playback when queue is empty
+            setIsPlaying(false);  
         }
     };
 
-    // Handle song end event to play the next song in the queue
     const handleSongEnd = () => {
         if (loop) {
-            audioRef.current.currentTime = 0;  // Restart song if loop is enabled
+            audioRef.current.currentTime = 0;  
             audioRef.current.play();
         } else if (currentQueue && currentQueue.length > 0) {
-            playNextInQueue();  // Play next song in queue
+            playNextInQueue();  
         } else {
-            setIsPlaying(false);  // Stop playback if no songs in the queue
+            setIsPlaying(false);  
         }
     };
 
-    // Handle normal song playback
     useEffect(() => {
         if (songId) {
-            playSongById(songId);  // Play the song if a new song ID is passed
+            playSongById(songId);  
         }
     }, [songId]);
 
-    // Handle queue change
     useEffect(() => {
-        setCurrentQueue(queue || []);  // Ensure queue is updated
-        setCurrentSongIndex(0); // Start from the first song in the queue
+        setCurrentQueue(queue || []);  
+        setCurrentSongIndex(0); 
     }, [queue]);
 
-    
-
-    const togglePlayPause = () => {
+    const togglePlayPause = (event) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent div
         const audio = audioRef.current;
         if (isPlaying) {
             audio.pause();
@@ -95,6 +87,7 @@ const MusicPlayer = ({ songId, queue }) => {
     };
 
     const handleVolumeChange = (event) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent div
         const newVolume = parseFloat(event.target.value);
         setVolume(newVolume);
         if (audioRef.current) {
@@ -109,6 +102,7 @@ const MusicPlayer = ({ songId, queue }) => {
     };
 
     const handleSliderChange = (event) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent div
         const newTime = parseFloat(event.target.value);
         setCurrentTime(newTime);
         if (audioRef.current) {
@@ -116,72 +110,104 @@ const MusicPlayer = ({ songId, queue }) => {
         }
     };
 
-    const toggleLoop = () => {
-        setLoop(!loop);  // Toggle the loop feature
+    const toggleLoop = (event) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent div
+        setLoop(!loop);
+    };
+    
+
+    const skipToNextSong = (event) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent div
+        playNextInQueue();  
     };
 
-    const skipToNextSong = () => {
-        playNextInQueue();  // Skip to the next song in the queue
+    const toggleMinimized = () => {
+        setIsMinimized(!isMinimized); 
     };
 
     return (
-        <div className="music-player">
+        <div className={`music-player ${isMinimized ? 'minimized' : ''}`}>
             {audioUrl && (
                 <>
-                    <div className="song-name">{songName}</div>
+                    <div className="song-name" onClick={toggleMinimized}>
+                        {songName}
+                    </div>
                     <audio
                         ref={audioRef}
-                        loop={loop}  // Set loop functionality
-                        onEnded={handleSongEnd} // Call the function to play the next song
+                        loop={loop}
+                        onEnded={handleSongEnd}
                         onTimeUpdate={handleTimeUpdate}
                     />
                     <div className="controls-container">
                         <div
                             className={isPlaying ? 'play-button pause' : 'play-button play'}
-                            onClick={togglePlayPause}
+                            onClick={(event) => {
+                                event.stopPropagation();  // Prevent triggering the minimize logic
+                                togglePlayPause(event);
+                            }}
                         >
                             {isPlaying ? 'Pause' : 'Play'}
                         </div>
-
-                        <div className="timer-container">
-                            <span className="current-time">
-                                {formatTime(currentTime)}
-                            </span>
-                            <input
-                                type="range"
-                                min="0"
-                                max={duration}
-                                value={currentTime}
-                                onChange={handleSliderChange}
-                                className="time-slider"
-                            />
-                            <span className="duration">
-                                {formatTime(duration)}
-                            </span>
-                        </div>
-
-                        <div className="volume-control">
-                            <label htmlFor="volume-slider">Volume</label>
-                            <input
-                                id="volume-slider"
-                                type="range"
-                                min="0"
-                                max="1"
-                                step="0.01"
-                                value={volume}
-                                onChange={handleVolumeChange}
-                            />
-                        </div>
-
-                        {/* Loop button */}
-                        <div className="loop-button" onClick={toggleLoop}>
-                            {loop ? 'Stop Loop' : 'Loop Song'}
-                        </div>
-
-                        {/* Skip button */}
-                        <div className="skip-button" onClick={skipToNextSong}>
-                            Skip to Next
-                        </div>
+    
+                        {!isMinimized && (
+                            <>
+                                <div className="timer-container">
+                                    <span className="current-time">
+                                        {formatTime(currentTime)}
+                                    </span>
+                                    <input
+                                        type="range"
+                                        min="0"
+                                        max={duration}
+                                        value={currentTime}
+                                        onChange={(event) => {
+                                            event.stopPropagation();  // Prevent triggering the minimize logic
+                                            handleSliderChange(event);
+                                        }}
+                                        className="time-slider"
+                                    />
+                                    <span className="duration">
+                                        {formatTime(duration)}
+                                    </span>
+                                </div>
+    
+                                <div className="volume-control">
+                                    <label htmlFor="volume-slider">Volume</label>
+                                    <input
+                                        id="volume-slider"
+                                        type="range"
+                                        min="0"
+                                        max="1"
+                                        step="0.01"
+                                        value={volume}
+                                        onChange={(event) => {
+                                            event.stopPropagation();  // Prevent triggering the minimize logic
+                                            handleVolumeChange(event);
+                                        }}
+                                    />
+                                </div>
+    
+                                <div
+                                    className="loop-button"
+                                    onClick={(event) => {
+                                        event.stopPropagation(); // Prevent triggering the minimize logic
+                                        toggleLoop(event);
+                                    }}
+                                >
+                                    {loop ? 'Stop Loop' : 'Loop Song'}
+                                </div>
+    
+                                <div
+                                    className="skip-button"
+                                    onClick={(event) => {
+                                        event.stopPropagation(); // Prevent triggering the minimize logic
+                                        skipToNextSong(event);
+                                    }}
+                                >
+                                    Skip to Next
+                                </div>
+                            </>
+                        )}
                     </div>
                 </>
             )}

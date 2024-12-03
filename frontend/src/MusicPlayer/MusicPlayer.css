@@ -1,75 +1,72 @@
-body, html {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.loop-button {
-  cursor: pointer;
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
-  border-radius: 5px;
-  font-size: 1em;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.loop-button.active {
-  background-color: #2980b9; /* Darker blue when loop is active */
-}
-
-.loop-button:hover {
-  background-color: #2980b9;
-}
-
 .music-player {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1px;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(52, 152, 219, 0.7));
+  border-radius: 15px;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.3);
   position: fixed;
-  bottom: 20px;
-  left: 0;
-  right: 0;
+  bottom: 20px;  /* Keep the player at the bottom */
+  left: 50%;  /* Center horizontally */
+  transform: translateX(-50%);  /* Adjust the position to perfectly center it horizontally */
+  width: 80%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+  cursor: pointer;  /* Makes the whole player clickable */
+}
+
+.music-player.minimized {
+  height: 50px;
+  padding: 10px;
+  overflow: hidden;  /* Hide overflow when minimized */
   width: 100%;
+  max-width: 500px;
 }
 
 .controls-container {
   display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.button-container {
-  margin-top: 10px;
-  cursor: pointer;
-}
-
-.triangle, .square {
-  width: 50px;
-  height: 50px;
-  background-color: #444;
-  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-  display: inline-block;
-  transition: transform 0.2s ease;
-}
-
-.square {
-  transform: rotate(90deg);
-}
-
-.volume-control {
-  display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px;
+  transition: opacity 0.3s ease;
 }
 
-#volume-slider {
-  width: 150px;
-  margin-left: 10px;
+.music-player.minimized .controls-container {
+  display: none;  /* Hide the controls when minimized */
+}
+
+.play-button {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+  background-color: #2980b9;
+}
+
+.song-name {
+  cursor: pointer;
+  display: none;  /* Hide the song name when minimized */
+}
+
+.music-player.minimized .song-name {
+  display: block;  /* Show the song name when minimized */
+  font-size: 14px;
+  color: white;
+}
+
+.timer-container,
+.volume-control {
+  display: block;
+}
+
+.music-player.minimized .timer-container,
+.music-player.minimized .volume-control,
+.music-player.minimized .loop-button,
+.music-player.minimized .skip-button {
+  display: none;  /* Hide controls when minimized */
 }

@@ -6,9 +6,60 @@
     width: 100%; /* Full width of the container */
     padding: 20px; /* Add padding to the container */
     box-sizing: border-box; /* Ensure padding doesn't affect width */
+    position: relative; /* Ensure the song list container is the reference for absolute positioning */
 }
 
-/* Styling for the search bar section */
+/* Styling for each song block */
+.song-block {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px; /* Restrict max width for better alignment */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin: 0 auto; /* Center align the blocks */
+    position: relative; /* Position relative to allow the absolute positioning of child elements */
+}
+
+/* Hamburger Menu Icon */
+.hamburger-menu {
+    position: absolute;
+    top: 15px; /* Distance from the top of the song block */
+    right: 15px; /* Distance from the right of the song block */
+    z-index: 10; /* Ensure it's above the song block content */
+    font-size: 24px; /* Adjust size of hamburger icon */
+    cursor: pointer;
+}
+
+/* Conditional Menu for Adding to Playlist */
+.menu {
+    position: absolute;
+    top: 40px; /* Position the menu below the hamburger icon */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+    z-index: 9; /* Ensure it's above other content */
+    display: flex;
+    flex-direction: column;
+}
+
+.menu select, .menu button {
+    margin: 5px 0; /* Add some spacing between menu items */
+}
+
+/* Additional song block hover effects */
+.song-block:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Search bar */
 .searchbar {
     display: flex;
     justify-content: space-between;
@@ -31,7 +82,7 @@
 }
 
 .searchbar input:focus {
-    border-color: #007BFF; /* Change border color on focus */
+    border-color: #007BFF;
 }
 
 .searchbar button {
@@ -46,52 +97,5 @@
 }
 
 .searchbar button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
-
-/* Styling for each song block */
-.song-block {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 800px; /* Restrict max width for better alignment */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    margin: 0 auto; /* Center align the blocks */
-}
-
-.song-block:hover {
-    transform: translateY(-8px); /* Slightly bigger hover effect */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.song-title {
-    font-size: 1.6em;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 12px;
-}
-
-.song-description {
-    font-size: 1.1em;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.play-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 18px;
-    font-size: 1.1em;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-}
-
-.play-button:hover {
-    background-color: #2980b9;
-}
-

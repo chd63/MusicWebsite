@@ -10,18 +10,15 @@
     margin-top: 10px;
     padding: 15px;
     border-radius: 5px;
-
     background-color: #ffb5b5;
 }
 
 .result-message {
     text-align: center;
     max-width: fit-content;
-
     display: block;
     margin-left: auto;
     margin-right: auto;
-
     font-size: 20px;
 }
 
@@ -31,25 +28,26 @@
 
 .account-label {
     margin: 5px;
-
     font-size: 16px;
 }
 
+/* Applied to both username and password inputs */
 .account-input {
     margin: 5px;
     border-radius: 5px;
-    padding: 5px;
-
+    padding: 10px; /* Adjust padding to make it look similar */
     font-size: 16px;
+    width: 100%;  /* Ensures the input fields take up the full width of the container */
+    box-sizing: border-box; /* Ensures padding doesn't affect the width */
 }
 
+/* Styling for the submit button */
 .account-submit-button {
     display: block;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
     max-width: fit-content;
-
     font-size: 16px;
     background-color: black;
     color: white;
