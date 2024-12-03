@@ -1,0 +1,51 @@
+.Layout-container {
+    width: 100%;
+    margin: auto;
+    padding: auto;
+}
+
+.title {
+    padding: 5px;
+    margin-left: 5px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #bb6262;
+    padding: 5px;
+}
+
+.links {
+    height: 20%;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 20px;
+    display: flex;
+}
+
+.nav-link {
+    font-size: 25px;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.3s ease;
+    transition: color 0.3s ease;
+    border: none;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.emphasized {
+    background-color: #000000;
+    color: white;
+}
+
+.emphasized:hover {
+    background-color: #ffffff;
+    color: black;
+}

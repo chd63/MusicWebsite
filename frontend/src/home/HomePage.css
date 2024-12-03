@@ -1,0 +1,97 @@
+/* General styling for the song list */
+.song-list {
+    display: flex;
+    flex-direction: column; /* Stack songs vertically */
+    gap: 30px; /* Add larger spacing between the song blocks */
+    width: 100%; /* Full width of the container */
+    padding: 20px; /* Add padding to the container */
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Styling for the search bar section */
+.searchbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchbar input {
+    width: 75%;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchbar input:focus {
+    border-color: #007BFF; /* Change border color on focus */
+}
+
+.searchbar button {
+    padding: 12px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.searchbar button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Styling for each song block */
+.song-block {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 800px; /* Restrict max width for better alignment */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    margin: 0 auto; /* Center align the blocks */
+}
+
+.song-block:hover {
+    transform: translateY(-8px); /* Slightly bigger hover effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.song-title {
+    font-size: 1.6em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+.song-description {
+    font-size: 1.1em;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.play-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #2980b9;
+}
+

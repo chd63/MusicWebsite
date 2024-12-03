@@ -1,0 +1,182 @@
+/* Main wrapper for song list and playlist sections */
+.song-list-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* Song List */
+.song-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: flex-start;
+    width: 70%;
+}
+
+/* Song Block */
+.song-block {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    width: 280px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover effect on song block */
+.song-block:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Song Title */
+.song-title {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 12px;
+    text-transform: capitalize;
+}
+
+/* Song Description */
+.song-description {
+    font-size: 1em;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    height: 50px; /* Limit description height */
+    overflow: hidden; /* Hide excess text */
+    text-overflow: ellipsis;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
+    font-size: 24px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+}
+
+/* Menu when the hamburger is clicked */
+.menu {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    width: 200px;
+}
+
+/* Button Styling (Play, Add to Queue) */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+/* Hover effect on buttons */
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Playlist Section */
+.playlist-section {
+    width: 28%;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Input Field for Playlist */
+input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+/* Playlist List */
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+ul li button {
+    font-size: 1.1em;
+    background-color: transparent;
+    color: #3498db;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    padding: 8px 0;
+}
+
+ul li button:hover {
+    background-color: #ecf1f4;
+    border-radius: 5px;
+}
+
+/* Error Message */
+.errorMessage {
+    color: red;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
+
+/* Loading Spinner (when data is being fetched) */
+.loading-spinner {
+    text-align: center;
+    font-size: 1.5em;
+    color: #3498db;
+}
+
+/* Adjustments for small screens */
+@media (max-width: 768px) {
+    .song-list-wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .song-list {
+        width: 100%;
+    }
+
+    .playlist-section {
+        width: 100%;
+    }
+
+    .song-block {
+        width: 100%;
+    }
+}

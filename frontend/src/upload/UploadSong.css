@@ -1,0 +1,53 @@
+.UploadSong {
+    text-align: center;
+}
+
+.uploadFile {
+    display: flex;
+    flex-direction: column;         /* Stack elements vertically */
+    align-items: flex-start;        /* Left-align elements */
+    justify-content: center;        /* Center elements in the container */
+    margin: 0 auto;                 /* Center the container itself */
+    width: 100%;                    /* Full width */
+    max-width: 600px;               /* Limit the maximum width */
+    padding: 40px;                  /* Add padding around the container */
+    border: 1px solid #ccc;         /* Add border */
+    border-radius: 10px;            /* Rounded corners */
+    background-color: #f9f9f9;     /* Light background color */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.errorMessage {
+    text-align: center;
+}
+
+.uploadFile span {
+    font-weight: bold;              /* Make the label bold */
+    margin-bottom: 10px;            /* Add space below the label */
+}
+
+.uploadFile input[type="text"], 
+.uploadFile input[type="file"] {
+    margin-bottom: 0px;            /* Space between inputs */
+    padding: 10px;                  /* Add padding inside the input fields */
+    border: 1px solid #ccc;         /* Border for the input */
+    border-radius: 5px;             /* Rounded corners */
+    width: 90%;                    /* Full width input */
+    font-size: 16px;                /* Increase font size for readability */
+}
+
+.uploadFile button {
+    margin-top: 30px;
+    padding: 8px 10px;             /* Button padding */
+    background-color: #4CAF50;      /* Button background color */
+    color: white;                   /* Text color */
+    border: none;                   /* Remove border */
+    border-radius: 5px;             /* Rounded corners */
+    cursor: pointer;                /* Pointer cursor on hover */
+    font-size: 16px;                /* Increase font size */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+.uploadFile button:hover {
+    background-color: #45a049;      /* Darker shade on hover */
+}
